@@ -30,20 +30,20 @@ class SlidingPuzzle:
             current_line = ''
 
     def move(self, row_index, col_index):
-            for this_row in range(self.row):
-                for this_col in range(self.col):
-                    #(row,col) is the zero's index
-                    if self.current_board[this_row][this_col] == 0:
-                        store_value = self.current_board[row_index][col_index]
-                        self.current_board[row_index][col_index] = self.current_board[this_row][this_col]
-                        self.current_board[this_row][this_col] = store_value
+            for r in range(self.row):
+                for c in range(self.col):
+                    #(this_row,this_col) is the zero's index
+                    if self.current_board[r][c] == 0:
+                        store_value = self.current_board[row_index][col_index] #temp var to store the original value of the provided box
+                        self.current_board[row_index][col_index] = self.current_board[r][c]
+                        self.current_board[r][c] = store_value
 
     def legalMoves(self):
-        for this_row in range(self.row):
-            for this_col in range(self.col):
+        for r in range(self.row):
+            for c in range(self.col):
                 #(row,col) is the zero's index
-                if self.current_board[this_row][this_col] == 0:
-                    zero_row = this_row
-                    zero_col = this_col
+                if self.current_board[r][c] == 0:
+                    zero_row = r
+                    zero_col = c
                     #TODO: Figure out how to determine which moves are legal and which are not.
                     #Then return a list of the tuple of each such index (rol, col)
