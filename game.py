@@ -3,7 +3,7 @@
 # Part of homework 8, problem 2
 ################################
 
-import slidingpuzzletest
+#from slidingpuzzletest import *
 
 from slidingpuzzle import *
 
