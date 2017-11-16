@@ -16,7 +16,8 @@ class SlidingPuzzle:
             for col in range(0, self.col):
                 self.current_board[row].append(acc)
                 acc += 1
-        print('<DEBUG>', self.current_board, '\n')
+        #print('<DEBUG>', self.current_board, '\n')
+        self.solved_board = self.current_board
 
     def displayPuzzle(self):
         current_line = '' #temp var to add numbers then print as a line
@@ -42,8 +43,17 @@ class SlidingPuzzle:
         for r in range(self.row):
             for c in range(self.col):
                 #(row,col) is the zero's index
-                if self.current_board[r][c] == 0:
-                    zero_row = r
-                    zero_col = c
-                    #TODO: Figure out how to determine which moves are legal and which are not.
-                    #Then return a list of the tuple of each such index (rol, col)
+                if self.current_board[r][c] == 0: #if the
+                    z_row = r #row of zero
+                    z_col = c #col of zero
+        moves = [(z_row - 1, z_col)] #start the moves list with this tuple
+        moves.append((z_row + 1, z_col)) #add each of the other 3 possible moves to the moves list
+        moves.append((z_row, z_col - 1))
+        moves.append((z_row, z_col + 1))
+        for item in moves: #iterate to remove illegal moves
+            if item[0] < 0 or item[1] < 0: #if the tuple is outside of the puzzle
+                moves.remove(item) #remove that tuple, it's an illegal move.
+            elif item[0] > len(self.current_board) or item[1] > len(self.current_board[0]): #if tuple is outside of the puzzle
+                moves.remove(item) #remove that tuple, it's an illegal move
+        print('<DEBUG> moves:', moves)
+        return moves #returns the moves list, after removing any tuple in it that was outside of the puzzle
