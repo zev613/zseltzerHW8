@@ -1,0 +1,69 @@
+import random
+
+class SlidingPuzzle:
+    def __init__(self, rows, columns):
+        self.row = rows
+        self.col = columns
+        self.current_board = []
+        acc = 0
+        for row in range(0, self.row):
+            self.current_board.append([])
+            for col in range(0, self.col):
+                self.current_board[row].append(acc)
+                acc += 1
+        self.solved_board = self.current_board
+
+    def displayPuzzle(self):
+        current_line = ''
+        for row in range(self.row):
+            for col in range(self.col):
+                if self.current_board[row][col] >= 10:
+                    current_line += str(self.current_board[row][col]) + ' '
+                else:
+                    current_line += str(self.current_board[row][col]) + '  '
+            print(current_line.rstrip())
+            current_line = ''
+
+    def move(self, row_index, col_index):
+            for r in range(self.row):
+                for c in range(self.col):
+                    #(this_row,this_col) is the zero's index
+                    if self.current_board[r][c] == 0:
+                        store_value = self.current_board[row_index][col_index]
+                        self.current_board[row_index][col_index] = self.current_board[r][c]
+                        self.current_board[r][c] = store_value
+
+    def legalMoves(self):
+        for r in range(self.row):
+            for c in range(self.col):
+                if self.current_board[r][c] == 0:
+                    z_row = r
+                    z_col = c
+        moves = [(z_row - 1, z_col)]
+        moves.append((z_row + 1, z_col))
+        moves.append((z_row, z_col - 1))
+        moves.append((z_row, z_col + 1))
+        for item in moves:
+            if item[0] < 0 or item[1] < 0:
+                moves.remove(item)
+            elif item[0] > len(self.current_board) or item[1] > len(self.current_board[0]):
+                moves.remove(item)
+        return moves
+
+    def scramble(self, randomMoves):
+        for i in range(randomMoves):
+            thisMove = random.choice(self.legalMoves)
+            self.move(thisMove[0], thisMove[1])
+
+    def isSolved(self):
+        if self.current_board == self.solved_board
+            return True
+        else:
+            return False
+
+The slidingpuzzle.py module has one class, and within the class there are six modules, __init__,  displayPuzzle, move, legalMoves, scramble and isSolved.
+The __init__ function is the class constructor, and has two parameters, rows and columns.
+
+To run the code:
+python slidingpuzzle.py
+

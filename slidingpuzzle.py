@@ -16,7 +16,6 @@ class SlidingPuzzle:
             for col in range(0, self.col):
                 self.current_board[row].append(acc)
                 acc += 1
-        #print('<DEBUG>', self.current_board, '\n')
         self.solved_board = self.current_board
 
     def displayPuzzle(self):
@@ -31,13 +30,13 @@ class SlidingPuzzle:
             current_line = ''
 
     def move(self, row_index, col_index):
-            for r in range(self.row):
+            for r in range(self.row): #Iterate for num of rows and cols
                 for c in range(self.col):
                     #(this_row,this_col) is the zero's index
                     if self.current_board[r][c] == 0:
                         store_value = self.current_board[row_index][col_index] #temp var to store the original value of the provided box
-                        self.current_board[row_index][col_index] = self.current_board[r][c]
-                        self.current_board[r][c] = store_value
+                        self.current_board[row_index][col_index] = self.current_board[r][c] #update 2nd value
+                        self.current_board[r][c] = store_value #use temp value to update
 
     def legalMoves(self):
         for r in range(self.row):
@@ -55,5 +54,15 @@ class SlidingPuzzle:
                 moves.remove(item) #remove that tuple, it's an illegal move.
             elif item[0] > len(self.current_board) or item[1] > len(self.current_board[0]): #if tuple is outside of the puzzle
                 moves.remove(item) #remove that tuple, it's an illegal move
-        print('<DEBUG> moves:', moves)
         return moves #returns the moves list, after removing any tuple in it that was outside of the puzzle
+
+    def scramble(self, randomMoves):
+        for i in range(randomMoves):
+            thisMove = random.choice(self.legalMoves)
+            self.move(thisMove[0], thisMove[1])
+
+    def isSolved(self):
+        if self.current_board == self.solved_board
+            return True
+        else:
+            return False
