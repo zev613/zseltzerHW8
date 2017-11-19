@@ -27,7 +27,6 @@ class SlidingPuzzle:
     def move(self, row_index, col_index):
             for r in range(self.row):
                 for c in range(self.col):
-                    #(this_row,this_col) is the zero's index
                     if self.current_board[r][c] == 0:
                         store_value = self.current_board[row_index][col_index]
                         self.current_board[row_index][col_index] = self.current_board[r][c]
@@ -61,8 +60,20 @@ class SlidingPuzzle:
         else:
             return False
 
-The slidingpuzzle.py module has one class, and within the class there are six modules, __init__,  displayPuzzle, move, legalMoves, scramble and isSolved.
+The slidingpuzzle.py module has one class, and within the class there are six methods, __init__,  displayPuzzle, move, legalMoves, scramble and isSolved.
 The __init__ function is the class constructor, and has two parameters, rows and columns.
+It sets the row and col instance variables from the  parameters. To create the current_board instance variable, it then iterates for the number of rows and then columns, 
+each time setting the value of that spot to an acc value that goes up by one each time. It then sets the solved_board instance variable to the result.
+The displayPuzzle method only takes self as a parameter, as doees every other method. This method uses an accumulator string current_line to print each row of the puzzle as a new line. 
+It iterates over the number of rows and columnns. It adds a single space if the value of that space is 20 or greater, and is therefore double digits. 
+If it is a single digit integer it adds two spaces after integer. The move method takes three parameters, self, row_index and col_index. 
+It starts by iterating over the number of rows and columns, to find the row and column index of zero. It then stores the integer at row_index and column_index to a temp storage variable. 
+It puts the value at row_index and col_index where the zero was. It then sets the value at the zero's original row and col to the temp storage value. 
+The legalMoves method iterates for row and col to find the zero. It then creates a list of the 4 spots around the zero. If the value of the row or the column is either zero or the last row or column, 
+that move gets removed from the list because it is illegal. It then returns that list of moves. The scramble method takes randomMoves as a parameter. This method iterates for numberMoves, 
+each time selecting a random choice from the legalMoves list, and then calling the move method with the row and col that was selected from the list. It does this for randomMoves number of times.
+The final method is isSolved. This checks if the current_board instance variable is equal to the solved_board instance variable. It returns True or False depending on such.
+
 
 To run the code:
 python slidingpuzzle.py

@@ -31,6 +31,11 @@ def main():
         board.displayPuzzle()
         print('Congratulations! You solve the puzzle!')
 
-The game.py module has one function, main. The main function takes no parameters.
+The game.py module has one function, main. The main function takes no parameters. This function runs the game
+itself, while slidingpuzzle.py has the class. First, it gets the row and column as input from user. It creates an instance of the SlidingPuzzle class, board.
+The user selects the difficulty, either 1,2 or 3. The program then scrambles the board depending on the difficulty chosen.
+The module then loops until the board is equal to the solved board. Each iteration, the user selects a row and column, until they are a legal move. 
+The program does the move. This continues until the board is solved. It congratulates the user and prints out the board using the displayPuzzle method of the SlidingPuzzle class.
+
 To run the code: 
 python game.py
